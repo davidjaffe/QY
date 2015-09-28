@@ -457,6 +457,17 @@ class reader():
         #print 'g.GetName(),x,y',x,y
         return x,y
     def compareGraphs(self,name):
+        '''
+        Create pdf file that compares graphs created from same raw data
+        Plot raw data(points+line) and either points or lines for the following.
+        X = [Line] baseline estimate using initial and final abscissa values
+        A = [Points] initial and final abscissa values used for estimate
+        P = [Line] baseline esimate using mode of ordinate values
+        O = [Points] values used for mode-based estimate
+        Two panels are created.
+        Top panel shows full ordinate range.
+        Lower panel concentrates on baseline.
+        '''
         prefixes = {'X':'L', 'A':'P', 'P':'L', 'O':'P'}
         graw = self.findGraph(name)
         title = 'Comparison' + graw.GetTitle()
@@ -510,7 +521,7 @@ class reader():
         append graph to global list and dict and bleat if requested
         '''
         debug = True
-        if debug:         print 'Created graph',g.GetName(),g.GetTitle()
+        if debug:         print 'Created graph #bins,name,title',g.GetN(),g.GetName(),g.GetTitle()
         self.Graphs.append(g)
         if g.GetName() in self.Graphdict: # error?
             sys.exit('storeGraph: ERROR graph name '+g.GetName()+' already exists')
@@ -585,6 +596,28 @@ class reader():
             self.storeGraph(gnew)
                         
         return
+    def graphLaurenCorr(self,subdir):
+        '''
+        make a graph of Lauren's correction function
+        '''
+        laurenDir = '../lcapelluto_WbLS/correction/'
+        fn = laurenDir + subdir + '.txt'
+        if os.path.isfile(fn):
+            f = open(fn,'r')
+            print 'graphLaurenCorr: Opened',fn
+            x,y = [],[]
+            for line in f:
+#                print line
+                a,b = line.split(' ')
+                x.append(float(a))
+                y.append(float(b))
+            title = fn
+            name  = 'lcapelluto_'+subdir
+            gnew = self.makeTGraph(x,y,title,name)
+            self.storeGraph(gnew)
+        else:
+            print 'graphLaurenCorr: ERROR non-existent file',fn
+        return
     def createGraphMinusFunction(self,xIn,yIn,Par):
         '''
         yOut = yIn - f(xIn,Par)
@@ -620,7 +653,96 @@ class reader():
             sX += dxhi+dxlo
         if sX>0.: sY = sY/sX
         return sY
-            
+    def compareGraphContents(self,gnames,descrip):
+        '''
+        compare contents of graphs named in input list
+        create multigraph
+        create graphs of ratios
+        '''
+        glist = []
+        gdict = {}
+        goodnames = []
+        finterp = {}
+        nmax = 0
+        xBig = None
+        if descrip not in self.MultiGraphs:
+            self.MultiGraphs[descrip] = TMultiGraph()
+            self.MultiGraphs[descrip].SetTitle(descrip)
+            self.MultiGraphs[descrip].SetName(descrip)
+        for name in gnames:
+            if name in self.Graphdict:
+                goodnames.append(name)
+                g = self.Graphdict[name]
+                glist.append(g)
+                N = goodnames.index(name)
+                self.color(g,N,N)
+                self.MultiGraphs[descrip].Add(g)
+                x,y = self.getGraphContent(g)
+                gdict[name] = [x,y]
+                if len(x)>nmax:
+                    nmax = len(x)
+                    xBig = x
+                finterp[name] = interp1d(x,y,bounds_error=False)
+            else:
+                print 'compareGraphContents: ERROR',name,'is not the name of a graph'
+
+        print ''
+        for name in goodnames:
+            print 'Column',goodnames.index(name),'Data',name
+        line = ''
+        nl = 10
+        sl = '{0:^'+str(nl)+'}'
+        line += sl.format('x')
+        for name in goodnames:
+            line += sl.format('y'+str(goodnames.index(name)))
+        for name in goodnames:
+            if name!=goodnames[0]:
+                line += sl.format('y'+str(goodnames.index(name))+'/y0')
+        print line
+
+        sf = '{0:>'+str(nl)+'.2f}'
+        si = '{1:>'+str(nl-1)+'.2f}{0:1.1}'
+        ratio = {}
+        for ax in xBig:
+            line = ''
+            line += sf.format(ax)
+            y0 = None
+            r  = []
+            for name in goodnames:
+                x,y = gdict[name]
+                if ax in x:
+                    Y = y[x.index(ax)]
+                    line += sf.format(Y)
+                else:
+                    Y = float(finterp[name](ax)) # otherwise output type is numpy.ndarray
+                    line += si.format('I',Y)
+                if y0 is None:
+                    y0 = Y
+                else:
+                    if name not in ratio: ratio[name] = []
+                    R = Y/y0
+                    r.append(R)
+                    ratio[name].append(R)
+            for Y in r:
+                line += sf.format(Y)
+            print line
+        print ''
+
+        if len(ratio)>0:
+            name0 = goodnames[0]
+            mgname = descrip + '_Ratio'
+            self.MultiGraphs[mgname] = TMultiGraph()
+            self.MultiGraphs[mgname].SetName(mgname)
+            self.MultiGraphs[mgname].SetTitle(mgname)
+            for name in ratio:
+                title = 'ratio of correction ' + name + ' to ' + name0
+                gname = 'Ratio_'+name
+                g = self.makeTGraph(xBig,ratio[name],title,gname)
+                self.storeGraph(g)
+                N = goodnames.index(name)
+                self.color(g,N,N)
+                self.MultiGraphs[mgname].Add(g)
+        return
     def Main(self):
         '''
         evocatively titled.
@@ -694,6 +816,13 @@ class reader():
         # calculation of correction function
         self.calcCorrFun('water')
         self.calcCorrFun('emcorr\ w\ cyhx')
+
+        # Lauren's correction functions
+        for name in ['water','normalizer','alignedDefault','alignedCyhx',]:
+            self.graphLaurenCorr(name)
+
+        # compare correction functions
+        self.compareGraphContents(['lcapelluto_water','blSubRN_water_inifinEst','blSubRN_water_modeEst'],'waterBased_correction')
         
         outfile = TFile(self.histFile,'RECREATE')
 
