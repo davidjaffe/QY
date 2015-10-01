@@ -321,12 +321,12 @@ class reader():
                     self.MultiGraphs[key] = TMultiGraph()
                     self.MultiGraphs[key].SetTitle(key)
                     self.MultiGraphs[key].SetName(key)
-                self.color(g,n,n)
+                self.color(g,n,n,setMarkerColor=True)
                 self.MultiGraphs[key].Add(g)
                 if debug: print 'add graph',g.GetName()
                 
         return
-    def color(self,obj,n,M):
+    def color(self,obj,n,M,setMarkerColor=False):
         '''
         set line color and marker type for obj based on indices n and M
         if M=n then use M to set marker type, otherwise determine marker type from n
@@ -343,6 +343,7 @@ class reader():
             else:
                 m = int(float(n)/float(LC))%LM
             obj.SetMarkerStyle( self.goodMarkers[m] )
+            if setMarkerColor: obj.SetMarkerColor( self.goodColors[c] )
             if debug: print 'color: m',m,'self.goodMarkers[m]',self.goodMarkers[m]
         return
     def getListOfAllDataFiles(self,topdir='data',fext=None):
@@ -359,7 +360,7 @@ class reader():
                         fn = dn + '/' + x
                         if os.path.isfile(fn): filenames.append(fn)
         return filenames
-    def getBaseline(self,filename,BLguess=0.,BLwidth=1.e20,n=0,Axis='ordinate'):
+    def getBaseline(self,filename,BLguess=0.,BLwidth=1.e20,n=0,Axis='ordinate',function='poly1'):
         '''
         Return parameters to linear function that gives the baseline for the data in filename.
         Also return values used in baseline estimate
@@ -372,28 +373,40 @@ class reader():
 
         if Axis=='ordinate':
             aX,aY = self.getConsistentPairs(x,y,BLguess,BLwidth,Axis=Axis)
-            P = self.fitLinear(aX,aY,p0=BLguess,p1=0.)
+            P = self.fitPoly(aX,aY,p0=BLguess,p1=0., fun=function)
         else:
             width=abs(x[n]-x[0])
             aX,aY = self.getConsistentPairs(x,y,x[0],width,Axis=Axis)
             bX,bY = self.getConsistentPairs(x,y,x[-1],width,Axis=Axis)
             aX.extend(bX)
             aY.extend(bY)
-            P = self.fitLinear(aX,aY)
+            P = self.fitPoly(aX,aY, fun=function)
         
         return P, aX,aY
-    def fitLinear(self,aX,aY, p0=None,p1=None):
+    def fitPoly(self,aX,aY, p0=None,p1=None, fun='poly1'):
         '''
-        Return parameters to linear function y = p0 + p1*x that fits the input values.
+        Depending on input parameter fun,
+        return parameters to either polynomial function y = p0 or y = p0 + p1*x that fits the input values.
         p0,p1 are initial guesses
+        Only can handle 0th, 1st order polynomials at present
         '''
         if p0 is None: p0 = sum(aX)/float(len(aX))
         if p1 is None: p1 = 0.
-        P0 = numpy.array( [p0,p1] )
         X = numpy.array( aX )
         Y = numpy.array( aY )
-        P,cov = curve_fit(self.linFun, X,Y,P0)
+        if fun.lower()=='linear' or fun.lower()=='poly1':
+            P0 = numpy.array( [p0,p1] )
+            P,cov = curve_fit(self.linFun, X,Y,P0)
+        elif fun.lower()=='constant' or fun.lower()=='poly0':
+            P0 = numpy.array( [p0] )
+            P,cov = curve_fit(self.conFun, X,Y,P0)
+        else:
+            sys.exit('fitPoly: ERROR Invalid argument fun='+str(fun))
         return P
+    def linFun(self,X,a,b):
+        return a+b*X
+    def conFun(self,X,a):
+        return self.linFun(X,a,0.)
     def getConsistentPairs(self,x,y,z0,dz,Axis='ordinate'):
         '''
         return abscissa and ordinate values with Axis values consistent with z0+-dz
@@ -407,23 +420,28 @@ class reader():
                 aX.append(u)
                 aY.append(v)
         return aX,aY
-    def graphBaseline(self,filename,Par,prefix='Baseline'):
+    def graphBaseline(self,filename,Par,prefix='Baseline',preString=None):
         '''
         create and return graph of baseline defined by parameters Par of polynomial function
         '''
         #print 'graphBaseline: filename',filename,'Par',Par
         x,y = self.readPairs(filename)
-        name = prefix[0] + self.getNameFromFilename(filename)
+        early = preString
+        if preString is None: early = prefix[0]
+        name = early + self.getNameFromFilename(filename)
         title = prefix + ' ' + self.getTitleFromFilename(filename)
         Ax,Ay = array('d',[]),array('d',[])
         for u in x:
-            v = self.linFun(u,Par[0],Par[1])
+            if len(Par)==1:
+                v = self.conFun(u,Par[0])
+            elif len(Par)==2:
+                v = self.linFun(u,Par[0],Par[1])
+            else:
+                sys.exit('graphBaseline: Unknown function. len(Par)='+str(len(Par)))
             Ax.append(u)
             Ay.append(v)
         g = self.makeTGraph(Ax,Ay,title,name)
         return g
-    def linFun(self,X,a,b):
-        return a+b*X
     def graphValues(self,filename,Ax,Ay,prefix='Showvalues'):
         '''
         graph values used to estimate baseline
@@ -456,19 +474,14 @@ class reader():
             y.append(float(b))
         #print 'g.GetName(),x,y',x,y
         return x,y
-    def compareGraphs(self,name):
+    def compareGraphs(self,name,gCompare):
         '''
         Create pdf file that compares graphs created from same raw data
-        Plot raw data(points+line) and either points or lines for the following.
-        X = [Line] baseline estimate using initial and final abscissa values
-        A = [Points] initial and final abscissa values used for estimate
-        P = [Line] baseline esimate using mode of ordinate values
-        O = [Points] values used for mode-based estimate
+        Plot raw data(points+line) and either points or lines as defined by dict gCompare
         Two panels are created.
         Top panel shows full ordinate range.
         Lower panel concentrates on baseline.
         '''
-        prefixes = {'X':'L', 'A':'P', 'P':'L', 'O':'P'}
         graw = self.findGraph(name)
         title = 'Comparison' + graw.GetTitle()
         purename = name.replace('raw','')
@@ -497,10 +510,8 @@ class reader():
                 #print 'compareGraphs: graw',graw.GetName(),'xmi,xma,ymi,yma',xmi,xma,ymi,yma
                 canvas.DrawFrame(xmi,ymi,xma,yma)
             graw.Draw(options[i])
-            for key in prefixes:
-                n = key+purename
-                g = self.findGraph(n)
-                g.Draw(prefixes[key])
+            for g in gCompare:
+                g.Draw(gCompare[g])
                 x,y = self.getGraphContent(g)
                 ylo = min(y)
                 yhi = max(y)
@@ -535,8 +546,11 @@ class reader():
         Get list of parameter values and keywords
         Do baseline subtraction.
         Plot result.
-        Integrate
+        Integrate (use two integration ranges)
         Store resulting integrals and method as function of wavelength
+        Plot integral vs wavelength
+        Plot 1/integral vs wavelength
+        Plot (1/integral)/(1/min(integral)) vs wavelength : this is the correction function
         '''
         Results = {}
 
@@ -555,14 +569,16 @@ class reader():
                     title = 'Baseline-subtracted ' + words + ' ' + self.getTitleFromFilename(filename)
                     gnew = self.makeTGraph(xraw,y,title,gname)
                     self.storeGraph(gnew)
-                    Integral = self.integrate(xraw,y)
-                    print name,words,Integral
-                    wl = float(name.split('_')[1])
-                    if words not in Results:
-                        Results[words] = [ [wl], [Integral] ]
-                    else:
-                        Results[words][0].append( wl )
-                        Results[words][1].append( Integral )
+                    for extra,dBins in [ ['',10000000], ['N6',6]]:
+                        key = words + extra
+                        Integral = self.integrate(xraw,y,dBins=dBins)
+                        print name,key,Integral
+                        wl = float(name.split('_')[1])
+                        if key not in Results:
+                            Results[key] = [ [wl], [Integral] ]
+                        else:
+                            Results[key][0].append( wl )
+                            Results[key][1].append( Integral )
 
         for words in Results:
             x,y = Results[words]
@@ -580,10 +596,12 @@ class reader():
             ###print 'method,name,title,x,y',method,name,title,x,y
             gnew = self.makeTGraph(x,y,title,name)
             self.storeGraph(gnew)
+            
             title = subdir + ' Reciprocal of baseline-sub integral vs wavelength ' + words
             name = 'blSubR_' + subdir + '_' + words
             gnew = self.makeTGraph(x,Ry,title,name)
             self.storeGraph(gnew)
+            
             y = []
             for q in Ry:
                 if q<0.:
@@ -621,36 +639,44 @@ class reader():
     def createGraphMinusFunction(self,xIn,yIn,Par):
         '''
         yOut = yIn - f(xIn,Par)
-        Get parameters
+
         Make copy of input so that output is same type
         loop over x values
         compute function value
         delete old entry
         insert new entry
         '''
-        a,b = Par
+
         yOut = yIn[:]
         for i,x in enumerate(xIn):
-            fx = self.linFun(x,a,b)
+            if len(Par)==1:
+                fx = self.conFun(x,Par[0])
+            elif len(Par)==2:
+                fx = self.linFun(x,Par[0],Par[1])
+            else:
+                sys.exit('createGraphMinusFunction: Unknown function len(Par)='+str(len(Par)))
             y = yIn[i]
             del yOut[i]
             yOut.insert(i,y-fx)
         return yOut
-    def integrate(self,xIn,yIn):
+    def integrate(self,xIn,yIn,dBins=100000000):
         '''
         compute integral of yIn, take bin widths from separation between xIn values
         Assumes Xin is monotonically increasing
+        Restrict integral to within +-dBins of max(yIn)
         '''
         sY = 0.
         sX = 0.
         Lm1 = len(yIn)-1
+        imax = yIn.index(max(yIn))
         for i,y in enumerate(yIn):
-            dxlo = 0.
-            if i>1: dxlo = xIn[i]-xIn[i-1]
-            dxhi = 0.
-            if i<Lm1: dxhi = xIn[i+1]-xIn[i]
-            sY += y*(dxhi+dxlo)
-            sX += dxhi+dxlo
+            if abs(imax-i)<=dBins:
+                dxlo = 0.
+                if i>1: dxlo = xIn[i]-xIn[i-1]
+                dxhi = 0.
+                if i<Lm1: dxhi = xIn[i+1]-xIn[i]
+                sY += y*(dxhi+dxlo)
+                sX += dxhi+dxlo
         if sX>0.: sY = sY/sX
         return sY
     def compareGraphContents(self,gnames,descrip):
@@ -675,7 +701,7 @@ class reader():
                 g = self.Graphdict[name]
                 glist.append(g)
                 N = goodnames.index(name)
-                self.color(g,N,N)
+                self.color(g,N,N,setMarkerColor=True)
                 self.MultiGraphs[descrip].Add(g)
                 x,y = self.getGraphContent(g)
                 gdict[name] = [x,y]
@@ -687,6 +713,7 @@ class reader():
                 print 'compareGraphContents: ERROR',name,'is not the name of a graph'
 
         print ''
+        print 'Compare',descrip
         for name in goodnames:
             print 'Column',goodnames.index(name),'Data',name
         line = ''
@@ -760,6 +787,7 @@ class reader():
             g = self.makeGraph(filename,suffix='raw')
             rawname = g.GetName()
             self.storeGraph(g)
+            forComparison = {}
 
             # plot data with mode subtracted
             mode,Nval,binWidth = self.getModeF(filename,nIter=1)
@@ -768,34 +796,46 @@ class reader():
             self.storeGraph(g)
 
             # using values consistent with mode, estimate baseline with linear function and plot it
-            Par, aX,aY = self.getBaseline(filename,BLguess=mode,BLwidth=binWidth)
+            Par, aX,aY = self.getBaseline(filename,BLguess=mode,BLwidth=binWidth,function='poly1')
             if filename not in self.baselinePar: self.baselinePar[filename] = [ [Par, 'modeEst'] ]
-            g = self.graphBaseline(filename,Par,'Plot for mode')
+            g = self.graphBaseline(filename,Par,'Mode selection, poly1')
             g.SetLineColor(ROOT.kBlue)
             self.storeGraph(g)
+            forComparison[g] = "L"
 
             # show raw data values used to estimate baseline
             g = self.graphValues(filename,aX,aY,prefix='Ordinate')
             g.SetLineColor(ROOT.kBlue)
             g.SetMarkerStyle(2) # +
             self.storeGraph(g)
+            forComparison[g] = "P"
 
 
             # using n initial and final values, estimate baseline with linear function and plot it
-            Par, aX,aY = self.getBaseline(filename,Axis='Abscissa',n=5)
+            Par, aX,aY = self.getBaseline(filename,Axis='Abscissa',n=5,function='poly1')
             self.baselinePar[filename].append( [Par, 'inifinEst'] )
-            g = self.graphBaseline(filename,Par,'X-axis selection')
+            g = self.graphBaseline(filename,Par,'X-axis selection, poly1')
             g.SetLineColor(ROOT.kRed)
             self.storeGraph(g)
+            forComparison[g] = "L"
+
+            # idem, but with a 0th order polynomial
+            Par, aX,aY = self.getBaseline(filename,Axis='Abscissa',n=5,function='poly0')
+            self.baselinePar[filename].append( [Par, 'inifinPoly0'] )
+            g = self.graphBaseline(filename,Par,'X-axis selection, poly0',preString='X0')
+            g.SetLineColor(ROOT.kGreen)
+            self.storeGraph(g)
+            forComparison[g] = "L"
 
             # show raw data values used to estimate baseline
             g = self.graphValues(filename,aX,aY,prefix='Abscissa')
             g.SetLineColor(ROOT.kRed)
             g.SetMarkerStyle(5) # X
             self.storeGraph(g)
+            forComparison[g] = "P"
 
             # comparison of graphs and methods to estimate baseline
-            self.compareGraphs(rawname)
+            self.compareGraphs(rawname,forComparison)
             
             
             # histograms
@@ -822,8 +862,14 @@ class reader():
             self.graphLaurenCorr(name)
 
         # compare correction functions
-        self.compareGraphContents(['lcapelluto_water','blSubRN_water_inifinEst','blSubRN_water_modeEst'],'waterBased_correction')
-        
+        methods = ['lcapelluto_water']
+        for x in ['blSubRN_water_inifinEst','blSubRN_water_modeEst','blSubRN_water_inifinPoly0']:
+            methods.append(x)
+            methods.append(x+'N6')
+        self.compareGraphContents(methods,'waterBased_correction')
+
+
+        ##### OUTPUT
         outfile = TFile(self.histFile,'RECREATE')
 
         for g in self.Graphs:   outfile.WriteTObject(g)
