@@ -97,6 +97,38 @@ class graphUtils():
         canvas.Update()
         canvas.Print(pdf,'pdf')
         return
+    def drawFit(self,h,figdir='',SetLogy=False,SetLogx=False):
+        '''
+        draw histogram with fit parameters
+        '''
+        name = h.GetName()
+        title = h.GetTitle()
+        if SetLogx: name += '_logx'
+        if SetLogy: name += '_logy'
+        pdf = figdir + name + '.pdf'
+        ps  = figdir + name + '.ps'
+        xsize,ysize = 1100,850 # landscape style
+        noPopUp = True
+        if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
+        canvas = TCanvas(pdf,title,xsize,ysize)
+        
+        gStyle.SetOptFit()
+        h.Draw()
+        if SetLogy: canvas.SetLogy(1)
+        if SetLogx: canvas.SetLogx(1)
+        
+        canvas.Draw()
+        canvas.SetGrid(1)
+        canvas.SetTicks(1)
+        canvas.cd()
+        canvas.Modified()
+        canvas.Update()
+        
+        canvas.Print(ps,'Landscape')
+        os.system('ps2pdf ' + ps + ' ' + pdf)
+        if os.path.exists(pdf): os.system('rm ' + ps)
+
+        return
     def drawMultiGraph(self,TMG,figdir='',SetLogy=False, SetLogx=False, abscissaIsTime = True, drawLines=True):
         '''
         draw TMultiGraph with legend and output as pdf
