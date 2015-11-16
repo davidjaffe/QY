@@ -73,7 +73,27 @@ class graphUtils():
         h = TH1D(name,title,nx,xmi,xma)
         for y in v: h.Fill(y)
         return h
-
+    def printHistStats(self,h):
+        '''
+        print some stats for input hist
+        '''
+        N,mean,stddev,underflow,overflow = self.getHistStats(h)
+        print h.GetTitle(),'mean',mean,'stddev',stddev,'Nentries',N,'uflow',underflow,'oflow',overflow
+        return
+    def getHistStats(self,h):
+        '''
+        return histogram stats
+        '''
+        axis = 1 # 1d hist only
+        mean = h.GetMean(axis)
+        stddev = h.GetStdDev(axis)
+        N = h.GetEntries()
+        underflow = h.GetBinContent(0)
+        if axis==1: nbins = h.GetNbinsX()
+        if axis==2: nbins = h.GetNbinsY()
+        if axis==3: nbins = h.GetNbinsZ()
+        overflow = h.GetBinContent(nbins+1)
+        return N,mean,stddev,underflow,overflow
     def drawGraph(self,g,figDir=""):
         '''
         output graph to file
