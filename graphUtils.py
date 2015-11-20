@@ -12,6 +12,7 @@ import math
 import ROOT 
 from ROOT import TH1D, TFile, gROOT, TCanvas, TLegend, TGraph, TDatime, TMultiGraph, gStyle, TGraphErrors, TLine
 from array import array
+import re # regular expression
 
 class graphUtils():
     def __init__(self):
@@ -148,6 +149,69 @@ class graphUtils():
         os.system('ps2pdf ' + ps + ' ' + pdf)
         if os.path.exists(pdf): os.system('rm ' + ps)
 
+        return
+    def finishDraw(self,canvas,ps,pdf,setGrid=True,setTicks=True):
+        '''
+        standard nonsense to finish drawing
+        '''
+        canvas.Draw()
+        canvas.SetGrid(setGrid)
+        canvas.SetTicks(setTicks)
+        canvas.cd()
+        canvas.Modified()
+        canvas.Update()
+        
+        canvas.Print(ps,'Landscape')
+        os.system('ps2pdf ' + ps + ' ' + pdf)
+        if os.path.exists(pdf): os.system('rm ' + ps)
+        return
+    def drawMultiHists(self,histlist,fname='',figdir='',statOpt=1111111,setLogy=False,setLogx=False):
+        '''
+        draw multiple histograms on single pdf output file
+        '''
+        nHist = len(histlist)
+        if nHist<=0:
+            print 'graphUtils.drawMultiHists: ERROR zero length histogram list'
+            return
+        if nHist==1:
+            nX = nY = 1
+        else:
+            nX = 2
+            nY = int(float(nHist)/float(nX) + 0.5)
+            if nHist<4: nX,nY = 1,nHist
+
+        #print 'nHist,nX,nY=',nHist,nX,nY
+
+        # set output file name        
+        pdf = figdir
+        if fname!='':
+            pdf += fname
+        else:
+            for h in histlist:
+                name = h.GetName()
+                pdf += name
+                if h!=histlist[-1]: pdf += '_'
+
+        if setLogx: pdf += '_logx'
+        if setLogy: pdf += '_logy'
+        ps = pdf + '.ps'
+        pdf += '.pdf'
+        
+        # open canvas, draw on it
+        title = ''
+        xsize,ysize = 1100,850 # landscape style
+        noPopUp = True
+        if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
+        canvas = TCanvas(pdf,title,xsize,ysize)
+        gStyle.SetOptStat(statOpt)
+        canvas.Divide(nX,nY)
+        for i,h in enumerate(histlist):
+            canvas.cd(i+1).SetLogy(setLogy)
+            canvas.cd(i+1).SetLogx(setLogx)
+            h.Draw()
+            #print i+1,h.GetName()
+    
+        self.finishDraw(canvas,ps,pdf)
         return
     def drawMultiGraph(self,TMG,figdir='',SetLogy=False, SetLogx=False, abscissaIsTime = True, drawLines=True):
         '''
