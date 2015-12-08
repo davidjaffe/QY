@@ -327,10 +327,11 @@ class graphUtils():
         g.SetTitle(title)
         g.SetName(name)
         return g
-    def color(self,obj,n,M,setMarkerColor=False):
+    def color(self,obj,n,M,setMarkerColor=False,setMarkerType=True):
         '''
         set line color and marker type for obj based on indices n and M
         if M=n then use M to set marker type, otherwise determine marker type from n
+        unless setMarkerType is False
         '''
         debug = False
         LC = len(self.goodColors)
@@ -338,15 +339,16 @@ class graphUtils():
         c = n%LC
         obj.SetLineColor( self.goodColors[c] )
         if debug: print 'color: obj',obj,'n',n,'obj.IsA().GetName()',obj.IsA().GetName()
-        oName = obj.IsA().GetName()
-        if oName=='TGraph' or oName=='TGraphErrors':
-            if M==n:
-                m = M%LM
-            else:
-                m = int(float(n)/float(LC))%LM
-            obj.SetMarkerStyle( self.goodMarkers[m] )
-            if setMarkerColor: obj.SetMarkerColor( self.goodColors[c] )
-            if debug: print 'color:',obj.GetName(),'m',m,'self.goodMarkers[m]',self.goodMarkers[m]
+        if setMarkerType:
+            oName = obj.IsA().GetName()
+            if oName=='TGraph' or oName=='TGraphErrors':
+                if M==n:
+                    m = M%LM
+                else:
+                    m = int(float(n)/float(LC))%LM
+                obj.SetMarkerStyle( self.goodMarkers[m] )
+                if setMarkerColor: obj.SetMarkerColor( self.goodColors[c] )
+                if debug: print 'color:',obj.GetName(),'m',m,'self.goodMarkers[m]',self.goodMarkers[m]
         return
     def getPoints(self,g,getErrors=False):
         '''
