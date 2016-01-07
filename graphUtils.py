@@ -74,6 +74,25 @@ class graphUtils():
         h = TH1D(name,title,nx,xmi,xma)
         for y in v: h.Fill(y)
         return h
+    def makeTH1Dwtd(self,x,y,title,Name=''):
+        '''
+        fill 1d hist with weights y
+        given equal size, monotonically increasing bin centers x
+        '''
+        name = Name
+        if Name=='': name = title.replace(' ','_').replace('.','_')
+        nx = len(x)
+        dx = x[1]-x[0]
+        xmi = min(x)-dx/2.
+        xma = max(x)+dx/2.
+        h = TH1D(name,title,nx,xmi,xma)
+        for a,b in zip(x,y): h.Fill(a,b)
+        ymi,yma = min(y),max(y)
+        dy = (yma-ymi)/20.
+        ymi,yma = ymi-dy/2.,yma+dy+2
+        h.SetMaximum(yma)
+        h.SetMinimum(ymi)
+        return h
     def printHistStats(self,h):
         '''
         print some stats for input hist
@@ -95,20 +114,28 @@ class graphUtils():
         if axis==3: nbins = h.GetNbinsZ()
         overflow = h.GetBinContent(nbins+1)
         return N,mean,stddev,underflow,overflow
-    def drawGraph(self,g,figDir=""):
+    def drawGraph(self,g,figDir="",SetLogx=False,SetLogy=False,option='APL'):
         '''
         output graph to file
         '''
         title = g.GetTitle()
         name  = g.GetName()
+        if SetLogx: name += '_logx'
+        if SetLogy: name += '_logy'
+        slash = ''
+        if len(figDir)>0 and figDir[-1]!='/': slash = '/'
         pdf   = figDir + name + '.pdf'
     
         xsize,ysize = 1100,850 # landscape style
         noPopUp = True
         if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
         canvas = TCanvas(pdf,title,xsize,ysize)
-    
-        g.Draw()
+
+        
+        g.Draw(option)
+
+        if SetLogy: canvas.SetLogy(1)
+        if SetLogx: canvas.SetLogx(1)
     
         canvas.Draw()
         canvas.SetGrid(1)
@@ -165,7 +192,7 @@ class graphUtils():
         os.system('ps2pdf ' + ps + ' ' + pdf)
         if os.path.exists(pdf): os.system('rm ' + ps)
         return
-    def drawMultiHists(self,histlist,fname='',figdir='',statOpt=1111111,setLogy=False,setLogx=False):
+    def drawMultiHists(self,histlist,fname='',figdir='',statOpt=1111111,setLogy=False,setLogx=False,dopt=''):
         '''
         draw multiple histograms on single pdf output file
         '''
@@ -208,12 +235,12 @@ class graphUtils():
         for i,h in enumerate(histlist):
             canvas.cd(i+1).SetLogy(setLogy)
             canvas.cd(i+1).SetLogx(setLogx)
-            h.Draw()
+            h.Draw(dopt)
             #print i+1,h.GetName()
     
         self.finishDraw(canvas,ps,pdf)
         return
-    def drawMultiGraph(self,TMG,figdir='',SetLogy=False, SetLogx=False, abscissaIsTime = True, drawLines=True):
+    def drawMultiGraph(self,TMG,figdir='',SetLogy=False, SetLogx=False, abscissaIsTime = True, drawLines=True, xAxisLabel=None,yAxisLabel=None):
         '''
         draw TMultiGraph with legend and output as pdf
         Default is that abscissa is calendar time.
@@ -270,10 +297,14 @@ class graphUtils():
                 g.SetMaximum(yma)
                 if "A" in dOption:
                     g.SetTitle( TMG.GetTitle() )
+                    if xAxisLabel is not None: g.GetXaxis().SetTitle(xAxisLabel)
+                    if yAxisLabel is not None: g.GetYaxis().SetTitle(yAxisLabel)
                 g.Draw(dOption)
                 dOption = dOption.replace("A","")
         else:
             TMG.Draw(dOption)
+            if xAxisLabel is not None: TMG.GetXaxis().SetTitle(xAxisLabel)
+            if yAxisLabel is not None: TMG.GetYaxis().SetTitle(yAxisLabel)
             if abscissaIsTime : self.fixTimeDisplay(TMG)
 
 
