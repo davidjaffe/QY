@@ -208,7 +208,17 @@ class graphUtils():
             if nHist<4: nX,nY = 1,nHist
 
         #print 'nHist,nX,nY=',nHist,nX,nY
-
+        # create output directory if it does not exist
+        if len(figdir)>0:
+            if os.path.isdir(figdir):
+               pass
+            else:
+                try:
+                    os.mkdir(figdir)
+                except IOError,e:
+                    print 'graphUtils.drawMultiHists',e
+                else:
+                    print 'graphUtils.drawMultiHists created',figdir
         # set output file name        
         pdf = figdir
         if fname!='':
