@@ -177,9 +177,10 @@ class graphUtils():
         if os.path.exists(pdf): os.system('rm ' + ps)
 
         return
-    def finishDraw(self,canvas,ps,pdf,setGrid=True,setTicks=True):
+    def finishDraw(self,canvas,ps,pdf,setGrid=True,setTicks=True,ctitle=None):
         '''
         standard nonsense to finish drawing
+        ctitle can be considered 'global' title
         '''
         canvas.Draw()
         canvas.SetGrid(setGrid)
@@ -187,6 +188,13 @@ class graphUtils():
         canvas.cd()
         canvas.Modified()
         canvas.Update()
+        ct = None
+        if ctitle is not None:
+            ct = ROOT.TText(0.5,0.975,ctitle)
+            ct.SetTextAlign(20) # horizontally centered
+            s = ct.GetTextSize()
+            ct.SetTextSize(s/2.) 
+            ct.Draw()
         
         canvas.Print(ps,'Landscape')
         os.system('ps2pdf ' + ps + ' ' + pdf)
@@ -219,10 +227,12 @@ class graphUtils():
                     print 'graphUtils.drawMultiHists',e
                 else:
                     print 'graphUtils.drawMultiHists created',figdir
-        # set output file name        
+        # set output file name and canvas title
         pdf = figdir
+        ctitle = None
         if fname!='':
             pdf += fname
+            ctitle = fname
         else:
             for h in histlist:
                 name = h.GetName()
@@ -240,6 +250,7 @@ class graphUtils():
         noPopUp = True
         if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
         canvas = TCanvas(pdf,title,xsize,ysize)
+
         gStyle.SetOptStat(statOpt)
         canvas.Divide(nX,nY)
         for i,h in enumerate(histlist):
@@ -247,8 +258,8 @@ class graphUtils():
             canvas.cd(i+1).SetLogx(setLogx)
             h.Draw(dopt)
             #print i+1,h.GetName()
-    
-        self.finishDraw(canvas,ps,pdf)
+
+        self.finishDraw(canvas,ps,pdf,ctitle=ctitle)
         return
     def drawMultiGraph(self,TMG,figdir='',SetLogy=False, SetLogx=False, abscissaIsTime = True, drawLines=True, xAxisLabel=None,yAxisLabel=None):
         '''
