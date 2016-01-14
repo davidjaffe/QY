@@ -74,7 +74,7 @@ class graphUtils():
         h = TH1D(name,title,nx,xmi,xma)
         for y in v: h.Fill(y)
         return h
-    def makeTH1Dwtd(self,x,y,title,Name=''):
+    def makeTH1Dwtd(self,x,y,title,Name='',NX=None,XMI=None,XMA=None):
         '''
         fill 1d hist with weights y
         given equal size, monotonically increasing bin centers x
@@ -85,11 +85,14 @@ class graphUtils():
         dx = x[1]-x[0]
         xmi = min(x)-dx/2.
         xma = max(x)+dx/2.
+        if NX is not None: nx = NX
+        if XMI is not None:xmi =XMI
+        if XMA is not None:xma =XMA
         h = TH1D(name,title,nx,xmi,xma)
         for a,b in zip(x,y): h.Fill(a,b)
         ymi,yma = min(y),max(y)
         dy = (yma-ymi)/20.
-        ymi,yma = ymi-dy/2.,yma+dy+2
+        ymi,yma = ymi-dy/2.,yma+dy/2.
         h.SetMaximum(yma)
         h.SetMinimum(ymi)
         return h
