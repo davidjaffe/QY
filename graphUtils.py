@@ -49,16 +49,25 @@ class graphUtils():
         if c==2: return time.strptime(day+text,fmt+"%H:%M:%S")
         sys.exit("graphUtils.convertTime ERROR Unknown input " + str(text))
         return
-    def fixTimeDisplay(self,g,showDate=False):
+    def fixTimeDisplay(self,g,showDate=False,maybeShowDate=True):
         '''
         set time axis to display nicely
         '''
         if g:
             g.GetXaxis().SetTimeDisplay(1)
             g.GetXaxis().SetTimeFormat("%H:%M")
-            if showDate: g.GetXaxis().SetTimeFormat("#splitline{%H:%M}{%y/%m/%d}")
+            if showDate:
+                g.GetXaxis().SetTimeFormat("#splitline{%H:%M}{%y/%m/%d}")
+            else:
+                if maybeShowDate:
+                    x1 = g.GetXaxis().GetXmin()
+                    x2 = g.GetXaxis().GetXmax()
+                    if x2-x1>24.*60.*60.:
+                        g.GetXaxis().SetTimeFormat("#splitline{%H:%M}{%y/%m/%d}")
+                        print 'graphUtils.fixTimeDisplay: >1 day, so use splitline in SetTimeFormat'
             g.GetXaxis().SetNdivisions(-409)
             g.GetXaxis().SetLabelSize(0.025) #0.5*lx)
+            g.GetXaxis().SetTimeOffset(0,"local") # what does this do?
 #            g.GetXaxis().SetTimeOffset(0,"gmt") # using gmt option gives times that are only off by 1 hour on tgraph
         else:
             print 'graphUtils.fixTimeDisplay: WARNING Null pointer passed to fixTimeDisplay?????'
@@ -295,11 +304,14 @@ class graphUtils():
         x2 = x1 + .5
         y1 = 0.9
         y2 = y1 + .1
-        lg = TLegend(x1,y1,x2,y2) 
+        lg = TLegend(x1,y1,x2,y2)
+        NGraph = 0
         for g in TMG.GetListOfGraphs():
+            NGraph += 1
             t = g.GetTitle()
             lg.AddEntry(g, t, "LP" )
             if abscissaIsTime : self.fixTimeDisplay(g)
+        if NGraph>6: lg.SetNColumns(2)
 
         dOption = "AP"
         if drawLines: dOption += "L"
