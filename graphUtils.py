@@ -212,7 +212,7 @@ class graphUtils():
         os.system('ps2pdf ' + ps + ' ' + pdf)
         if os.path.exists(pdf): os.system('rm ' + ps)
         return
-    def drawMultiHists(self,histlist,fname='',figdir='',statOpt=1111111,setLogy=False,setLogx=False,dopt=''):
+    def drawMultiHists(self,histlist,fname='',figdir='',statOpt=1111111,setLogy=False,setLogx=False,dopt='',abscissaIsTime=False):
         '''
         draw multiple histograms on single pdf output file
         '''
@@ -268,7 +268,10 @@ class graphUtils():
         for i,h in enumerate(histlist):
             canvas.cd(i+1).SetLogy(setLogy)
             canvas.cd(i+1).SetLogx(setLogx)
+            if abscissaIsTime : self.fixTimeDisplay(h)
+
             h.Draw(dopt)
+            if abscissaIsTime : self.fixTimeDisplay(h)
             #print i+1,h.GetName()
 
         self.finishDraw(canvas,ps,pdf,ctitle=ctitle)
@@ -435,3 +438,36 @@ class graphUtils():
                     dy.append(g.GetErrorY(i))
         if getErrors: return x,y,dx,dy
         return x,y
+    def getTDatime(self,dt,fmt='%Y/%m/%d %H:%M:%S'):
+        '''
+        convert date/time text to TDatime object
+        '''
+        datetimeObj = self.getdatetime(dt,fmt=fmt)
+        return TDatime( datetimeObj.strftime('%Y-%m-%d %H:%M:%S') ).Convert()
+    def getdatetime(self,dt,fmt='%Y/%m/%d %H:%M:%S'):
+        ''' convert timestamp dt to text '''
+        return datetime.datetime.strptime(dt,fmt)
+    def reportHist(self,h):
+        '''
+        write out some properties of hist h
+        '''
+        name = h.GetName()
+        title = h.GetTitle()
+        xa = h.GetXaxis()
+        nx = xa.GetNbins()
+        xmi= xa.GetXmin()
+        xma= xa.GetXmax()
+        xex= xa.CanExtend()
+        nd = h.GetDimension()
+        words = 'graphUtils.reportHist',name,title,'nx,xmi,xma',nx,xmi,xma
+        if xex: words += 'can extend x-axis.'
+        if nd>1:
+            ya = h.GetYaxis()
+            ny = ya.GetNbins()
+            ymi= ya.GetXmin()
+            yma= ya.GetXmax()
+            yex= ya.CanExtend()
+            words += 'ny,ymi,yma=',ny,ymi,yma
+            if yex: words += 'can extend y-axis.'
+        print words
+        return
