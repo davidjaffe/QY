@@ -64,7 +64,7 @@ class graphUtils():
                     x2 = g.GetXaxis().GetXmax()
                     if x2-x1>24.*60.*60.:
                         g.GetXaxis().SetTimeFormat("#splitline{%H:%M}{%y/%m/%d}")
-                        print 'graphUtils.fixTimeDisplay: >1 day, so use splitline in SetTimeFormat'
+                        #print 'graphUtils.fixTimeDisplay: >1 day, so use splitline in SetTimeFormat'
             g.GetXaxis().SetNdivisions(-409)
             g.GetXaxis().SetLabelSize(0.025) #0.5*lx)
             g.GetXaxis().SetTimeOffset(0,"local") # what does this do?
@@ -157,11 +157,12 @@ class graphUtils():
         canvas.Update()
         canvas.Print(pdf,'pdf')
         return
-    def drawFit(self,h,figdir='',SetLogy=False,SetLogx=False):
+    def drawFit(self,h,figdir='',SetLogy=False,SetLogx=False,extraName=None):
         '''
         draw histogram with fit parameters
         '''
         name = h.GetName()
+        if extraName is not None: name += '_' + extraName
         title = h.GetTitle()
         if SetLogx: name += '_logx'
         if SetLogy: name += '_logy'
@@ -172,7 +173,7 @@ class graphUtils():
         if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
         canvas = TCanvas(pdf,title,xsize,ysize)
         
-        gStyle.SetOptFit()
+        gStyle.SetOptFit(1111)
         h.Draw()
         if SetLogy: canvas.SetLogy(1)
         if SetLogx: canvas.SetLogx(1)
