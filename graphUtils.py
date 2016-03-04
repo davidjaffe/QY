@@ -265,18 +265,33 @@ class graphUtils():
         canvas = TCanvas(pdf,title,xsize,ysize)
 
         gStyle.SetOptStat(statOpt)
-        canvas.Divide(nX,nY)
+        spaceBtwnPads = 0.01 / 1000.
+        canvas.Divide(nX,nY,spaceBtwnPads,spaceBtwnPads)
         for i,h in enumerate(histlist):
             canvas.cd(i+1).SetLogy(setLogy)
             canvas.cd(i+1).SetLogx(setLogx)
             if abscissaIsTime : self.fixTimeDisplay(h)
 
             h.Draw(dopt)
+            self.biggerLabels(h)
             if abscissaIsTime : self.fixTimeDisplay(h)
             #print i+1,h.GetName()
 
         self.finishDraw(canvas,ps,pdf,ctitle=ctitle)
         return
+    def biggerLabels(self,h):
+        '''
+        increase axis label size
+
+        '''
+        factor = 2.0 # empirically determined
+        sx = h.GetXaxis().GetLabelSize()
+        h.GetXaxis().SetLabelSize(factor*sx)
+        sy = h.GetYaxis().GetLabelSize()
+        h.GetYaxis().SetLabelSize(factor*sy)
+
+        return
+        
     def drawMultiGraph(self,TMG,figdir='',SetLogy=False, SetLogx=False, abscissaIsTime = True, drawLines=True, xAxisLabel=None,yAxisLabel=None):
         '''
         draw TMultiGraph with legend and output as pdf
