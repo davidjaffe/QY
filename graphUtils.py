@@ -134,9 +134,8 @@ class graphUtils():
         name  = g.GetName()
         if SetLogx: name += '_logx'
         if SetLogy: name += '_logy'
-        slash = ''
-        if len(figDir)>0 and figDir[-1]!='/': slash = '/'
-        pdf   = figDir + name + '.pdf'
+
+        pdf   = os.path.join( figDir,  name + '.pdf')
     
         xsize,ysize = 1100,850 # landscape style
         noPopUp = True
@@ -166,8 +165,8 @@ class graphUtils():
         title = h.GetTitle()
         if SetLogx: name += '_logx'
         if SetLogy: name += '_logy'
-        pdf = figdir + name + '.pdf'
-        ps  = figdir + name + '.ps'
+        pdf = os.path.join( figdir ,  name + '.pdf' )
+        ps  = os.path.join( figdir , name + '.ps' )
         xsize,ysize = 1100,850 # landscape style
         noPopUp = True
         if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
@@ -241,16 +240,18 @@ class graphUtils():
                 else:
                     print 'graphUtils.drawMultiHists created',figdir
         # set output file name and canvas title
-        pdf = figdir
+
         ctitle = None
         if fname!='':
-            pdf += fname
+            pdf = os.path.join( figdir, fname )
             ctitle = fname
         else:
+            words = ''
             for h in histlist:
                 name = h.GetName()
-                pdf += name
-                if h!=histlist[-1]: pdf += '_'
+                words += name
+                if h!=histlist[-1]: words += '_'
+            pdf = os.path.join( figdir, words )
 
         if setLogx: pdf += '_logx'
         if setLogy: pdf += '_logy'
@@ -308,8 +309,8 @@ class graphUtils():
         nGraphs = TMG.GetListOfGraphs().GetSize()
 
 
-        pdf = figdir + name  + '.pdf'
-        ps  = figdir + name  + '.ps'
+        pdf = os.path.join( figdir , name  + '.pdf' )
+        ps  = os.path.join( figdir , name  + '.ps')
         xsize,ysize = 1100,850 # landscape style
         noPopUp = True
         if noPopUp : gROOT.ProcessLine("gROOT->SetBatch()")
