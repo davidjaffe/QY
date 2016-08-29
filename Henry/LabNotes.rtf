@@ -1,0 +1,385 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}}
+{\*\generator Msftedit 5.41.15.1515;}\viewkind4\uc1\pard\b\f0\fs20 2016-04-06\par
+QY measurements\par
+\b0 Going to test PPO in LAB and PPO in EtOH initially.\par
+PPO in EtOH has a known QY at 337 nm excitation.\par
+The slits have been narrowed to give 2 nm wavelength resolution on excitation/emission.\par
+I'll keep this wavelength resolution throughout.\par
+The background will always be subtracted with a 5 second blank measurement.\par
+\par
+\b Sample key:\b0\par
+Std = PPO in EtOH, 3.141 g/L\par
+Samp = PPO in LAB, 2 g/L\par
+Val = PPO in EtOH, diluted (concentration TBC)\par
+\par
+\b Measurements:\par
+\b0 1.\tab Std, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_3.141gL_ex337.txt\par
+2. \tab Samp, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex337.txt\par
+3.\tab Samp, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex330.txt\par
+4.\tab Std, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_3.141gL_ex330.txt\par
+\b\par
+\b0 Noticed odd behaviour in peak intensity: the EtOH samples exhibit little difference between 330 nm and 337 nm (<5%), whereas the LAB samples see a 43% decrease going from 337 to 330 nm excitation. I'm not sure why, but it may be due to strong absorption effects. Measuring at 340 nm, and I'll measure at 337 nm again later to check for drift in the instrument response.\par
+\par
+5.\tab Std, 340 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_3.141gL_ex340.txt\par
+6.\tab Samp, 340 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex340.txt\par
+\par
+The peak intensity at 340 nm excitation for the LAB sample is now comparable to the 330 nm excitation, and not comparable to the 337 nm excitation! I suspect I've smudged the cuvette somehow. I'll change the methodology now: I'll take all sample measurements first, the I'll take the standard measurements. This eliminates any systematic associated with changing the vial optics. I'll re-take the 337 nm excitation measurement to confirm this hypothesis.\par
+\par
+7.\tab Samp, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex337_2.txt\par
+\par
+The peak intensity is now 20% lower at 337 nm excitation compared to the 340 nm excitation measurement! I'll check repeatability at 340 nm excitation.\par
+\par
+8.\tab Samp, 340 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex340_2.txt\par
+\b\par
+\b0 The 340 nm excitation result is indeed repeatable. I'll confirm the 337 nm measurement, just to be sure.\par
+\par
+9.\tab Samp, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex337_3.txt\par
+\par
+The peak absorbance from this measurement was 10% higher than the previous measurement! This is concerning as the sample wasn't removed, so it suggests the instrument may not be stable. \par
+Actually, on closer inspection, the RAW data looks like it agrees perfectly, so this is some correction error. This means that THE ANALYSIS MUST BE DONE ON THE RAW DATA (Corrections can be applied afterwards).\par
+\par
+10.\tab Samp, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex330_2.txt\par
+\b\par
+\b0 11.\tab Samp, 320 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex320.txt\par
+\b\par
+\b0 12.\tab Samp, 310 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex310.txt\par
+\b\par
+\b0 13.\tab Samp, 300 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_2gL_ex300.txt\par
+\b\par
+* Henry made further measurements; see his notebook for details.\par
+\par
+2016-04-06\b0\par
+Turned on the lamp at 8:05 to warm it up.\par
+The plan today is to do measurements with the dilute PPO and diluted bis-MSB in LAB samples.\par
+I'll continue the measurements with the diluted PPO for now, though we probably need to go to a lower dilution to be sure we're avoiding sample geometry systematics.\par
+\par
+New sample key:\par
+- Diluted samp = PPO in LAB, 0.02 g/L\par
+\par
+14.\tab Diluted samp, 350 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex350.txt\par
+\b\par
+\b0 15.\tab Diluted samp, 360 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex360.txt\par
+\b\par
+\b0 16.\tab Diluted samp, 370 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex370.txt\par
+\b\par
+\b0 17.\tab Diluted samp, 380 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex380.txt\par
+\par
+18.\tab Diluted samp, 390 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex390.txt\par
+\par
+19.\tab Diluted samp, 400 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex400.txt\par
+\b\par
+\b0 20.\tab Diluted samp, 320 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex320.txt\par
+\b\par
+\b0 21.\tab Diluted samp, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex330.txt\par
+\b\par
+\b0 22.\tab Diluted samp, 310 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_0.02gL_ex310.txt\par
+\b\par
+New samples:\b0\par
+Because the samples we've measured to date have been far too concentrated, we've made some more dilute samples to measure.\par
+Key:\par
+Std_1 = PPO in EtOH, 1.26 mg/L\par
+Samp_1 = PPO in LAB, 1.33 mg/L\par
+\par
+23.\tab Std_1, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex337.txt\par
+\par
+24.\tab Std_1, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex330.txt\par
+\b\par
+\b0 The Rayleigh scatter peak is noticable in both of the previous measurements. The minimum possible excitation wavelength (from the absorbance data) before LAB takes over the absorbance.\par
+\par
+25.\tab Std_1, 325 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex325.txt\par
+\b\par
+\b0 Testing the peak height (as a proxy for total fluorescence) of the above 3 measurements, and correlating with the absorbance at the exciting wavelengths (we expect a constant QY).\par
+The peak heights are 1.04E6, 2.63E6, and 3.24E6 at 337 nm, 330 nm, and 325 nm.\par
+This gives fluorescence signal ratios of 330/337 = 2.53, 320/337 = 3.11, and 320/330 = 1.23.\par
+The expected absorbance ratios are - 330/337 = 1.8, 320/337 = 2.275, and 320/330 = 1.27.\par
+\par
+26.\tab Std_1, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex337_2.txt\par
+\b\par
+\b0 27.\tab Std_1, 320 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex320.txt\par
+\par
+28.\tab Std_1, 340 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex340.txt\par
+\b\par
+\b0 29.\tab Std_1, 334 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Aug4\\PPO_etoh_1.26mgL_ex334.txt\par
+\b\par
+\b0 The ratios of peak height/absorbance still don't line up. I don't fully understand why this is, though it could be due to some wavelength calibration offset between the UV-VIS and fluorescence spectrometers (this would have implications for the QY calculations).\par
+I'll press on and do the PPO in LAB sample to see what happens.\par
+\par
+30.\tab Samp_1, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex337.txt\par
+\par
+31.\tab Samp_1, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex330.txt\b\par
+\par
+\b0 32.\tab Samp_1, 325 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex325.txt\b\par
+\par
+\b0 The three spectra above look quite different; is the LAB interfering?\par
+\par
+33.\tab Samp_1, 340 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex340.txt\par
+\b\par
+\b0 34.\tab Samp_1, 334 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex334.txt\par
+\b\par
+\b0 35.\tab Samp_1, 332 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex332.txt\par
+\b\par
+\b0 36.\tab Samp_1, 320 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOlab\\Aug4\\PPO_LAB_1.33mgL_ex320.txt\par
+\b\par
+\b0 Moving on to bis-MSB in LAB.\par
+Key:\par
+Samp_2 = bis-MSB in LAB, 0.894 mg/L.\par
+\par
+37.\tab Samp_2, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex337.txt\par
+\b\par
+\b0 Saw an odd small peak at ~356 nm, which is suspiciously close to PPO's peak at 357 nm. Washing and re-measuring.\par
+\par
+38.\tab Samp_2, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex337_2.txt\par
+\b\par
+\b0 Small peak is still there; measuring at 330 nm to see probe its excitation.\par
+\par
+39.\tab Samp_2, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex330.txt\par
+\b\par
+\b0 Much bigger at 330 nm excitation; though the peak location moved. I think this is consistent with what I saw with PPO in LAB.\par
+Measuring at longer wavelengths should minimise the PPO emission.\par
+\par
+40.\tab Samp_2, 340 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex340.txt\par
+\par
+41.\tab Samp_2, 350 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex350.txt\par
+\b\par
+\b0 42.\tab Samp_2, 360 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex360.txt\par
+\b\par
+\b0 I suspect that the LAB may have some PPO contamination, so I'll measure some ostensibly pure LAB in the fluorescence spectrometer.\par
+\par
+Key:\par
+LAB_1 = LAB given by Richard on 16-08-04.\par
+\par
+43.\tab LAB, 337 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\lab\\LAB_100pc_ex337.txt\par
+\b\par
+\b0 44.\tab LAB, 330 nm excitation, 300-600 nm, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\lab\\LAB_100pc_ex330.txt\par
+\b\par
+\b0 It is possible that the peaks that are being seen are just the pure LAB emission, as it does seem to have a shoulder at 340 nm. I'll use 280 nm a la "study of absorption and re-emission processes in a ternary liquid scintillation system", Chinese Phys C, \b 34\b0 (11):1724-1728 (2010).\par
+\par
+\b 16-08-08\b0\par
+- I'm suspecting there's a wavelength calibration offset between the fluorescence spectrometer box and the UV-VIS. The calibration chain is worked out as follows:\par
+\tab * The fluorescent lights are measured and assumed to be known perfectly. This sets the absolute scale for the emission monochromator.\par
+\tab * A scatter peak is measured in the box at a couple of wavelengths with an emission scan. This sets the absolute scale for the excitation monochromator.\par
+\tab * A bandpass filter (nominally centred at 440 nm +/- 10 nm FWHM) is measured in the fluorescence spectrometer. The excorr signal is used, so the offset is only from the \tab   excitation monochromator.\par
+\tab * The same bandpass filter is measured in the UV-VIS, to transfer the absolute wavelength calibration to it via the excitation monochromator.\par
+\par
+\b 16-08-11\b0\par
+- I measured a SmNO3 standard solution in the UV-VIS (apparently Sm is an alternative standard to Ho). There are quite a few lines. I'm now measuring it in the box with the Sm solution directly after the monochromator.\par
+\par
+45.\tab LAB with Sm cuvette after excitation monochromator, 200-600 nm excitation, 300 nm emission, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\WLcalib\\SmStd_1.txt\par
+\par
+46.\tab LAB with Sm cuvette after excitation monochromator; moved slightly closer to monochromator. 200-600 nm excitation, 300 nm emission, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\WLcalib\\SmStd_2.txt\par
+\b\par
+\b0 47.\tab LAB with nothing in the beam. 200-600 nm excitation, 300 nm emission, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\WLcalib\\NothingInBeam.txt\par
+\par
+\b 16-08-12\b0\par
+\par
+The measurements yesterday were promising, but the absorbance from the Sm was not strong enough (plus the N03 absorption got in the way). So I dispensed 0.02 g/mL Sm as SmCl3. The UV-VIS looks great; measuring the fluorescence now...\par
+\par
+48.\tab LAB with nothing in the beam. 200-600 nm excitation, 300 nm emission, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\WLcalib\\NothingInBeam160812.txt\par
+\par
+49. \tab LAB with SmCl3 cuvette after excitation monochromator. 200-600 nm excitation, 300 nm emission, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\WLcalib\\SmCl3_1.txt\par
+\par
+I realised that the effect of the cuvette isn't accounted for by having nothing in the beam; so I made a water-filled cuvette and did a measurement.\par
+\par
+50.\tab LAB with water cuvette after excitation monochromator. 200-600 nm excitation, 300 nm emission, 1 sec integration, 1 nm steps.\par
+\b\tab\b0 Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\WLcalib\\Water_1.txt\par
+\par
+\b 16-08-17\b0\par
+\par
+The measurements in the box work, although the sensitivity to the wavelength calibration offset between the excitation monochromator and the UV-VIS monochromator is too high for these measurements to be too useful for PPO.\par
+\par
+The next task is to measure the QY in the sphere, now that I know how the excitation correction works.\par
+\par
+Firstly, measure the wavlength calibration offset between the excitation and emission monochromators...\par
+\par
+I'm seeing no counts with nothing in the sphere/box and the optics looking correctly set up on a sync scan... It's possible that the misalignment between the monochromator calibrations is to blame. Measuring this first...\par
+\par
+51.\tab Room lights calibration, emcorr-sphere-quanta, 380-570nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\RoomLights_NoCalShift.txt\par
+\b\par
+\b0 After taking these data and fitting the peaks, I had some confusion about how the calibration is actually implemented.\par
+I re-started FelixGX and took some more data:\par
+\par
+52.\tab Room lights calibration, emcorr-sphere-quanta, 380-570nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\RoomLights_NoCalShift_2.txt\par
+\b\par
+\b0 The procedure appears to be:\par
+\tab - Write the measured peak location as the 'go to' calibration point.\par
+\b\tab - \b0 Write the real peak location (from the reference data) as the 'set' calibration point.\par
+\tab - Be sure to press the 'set' button.\par
+\par
+Took some data to confirm the emission mono is calibrated nicely now:\par
+\par
+53.\tab Room lights calibration, emcorr-sphere-quanta, 380-570nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\RoomLights_Calibrated.txt\par
+\b\par
+\b0 Now checking the excitation monochromator. I'll do measurements at 350, 400 and 450 nm.\par
+\par
+54.\tab Ex mono calibration, ex: 350 nm, 340-360nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\ExCal_350nm.txt\par
+\par
+55.\tab Ex mono calibration, ex: 400 nm, 390-410nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\ExCal_400nm.txt\par
+\b\par
+\b0 56.\tab Ex mono calibration, ex: 450 nm, 440-460nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\ExCal_450nm.txt\par
+\b\par
+\b0 Made Excitation mono correction; ran measurements over excitation peaks:\par
+\par
+56.\tab Ex mono calibration, ex: 450 nm, 440-460nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\ExCal_450nm_corrected.txt\par
+\b\par
+\b0 57.\tab Ex mono calibration, ex: 400 nm, 390-410nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\ExCal_400nm_corrected.txt\par
+\b\par
+\b0 58.\tab Ex mono calibration, ex: 350 nm, 340-360nm scan, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\WLcalib\\ExCal_350nm_corrected.txt\par
+\b\par
+\b0 The measurements look OK (they're within 1 nm, but they're not perfect).\par
+Now I want to test out how the Sync Scan works with the corrections.\par
+\par
+59.\tab Sync Scan through empty sphere, 250-800 nm, default excorr, no emcorr, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\EmissionCorrection\\SyncScan_DefaultExcorr_NoExcorr.txt\par
+\par
+60.\tab Sync Scan through empty sphere, 250-800 nm, excorr (file correction), emcorr-sphere-quanta, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\EmissionCorrection\\SyncScan_ExcorrFile_emcorr-sphere-quanta.txt\par
+\b\par
+bis-MSB in LAB:\par
+\b0 Time has come to put this to the test, and measure bis-MSB in LAB.\par
+\par
+61.\tab Emission Scan, pure LAB, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex350_1sec.txt\par
+\b\par
+\b0 62.\tab Emission Scan, pure LAB, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex350_2sec.txt\par
+\b\par
+2016-08-18\b0\par
+Measuring bis-MSB in LAB now...\par
+\par
+62.\tab Emission Scan, bisMSB in LAB 0.894 mg/L, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_0.894mgL_ex350_2sec.txt\par
+\b\par
+\b0 63.\tab Emission Scan, bisMSB in LAB 0.894 mg/L, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_0.894mgL_ex350_1sec.txt\par
+\b\par
+\b0 Results from these measurements suggest that they are too sensitive to the baseline subtraction, integration ranges, etc. (because there aren't enough counts). So I'll measure with the 4.47 mg sample instead.\par
+\par
+64.\tab Emission Scan, bisMSB in LAB 4.47 mg/L, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 1 sec integration, 1 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex350_1sec.txt\par
+\b\par
+\b0 64.\tab Emission Scan, bisMSB in LAB 4.47 mg/L, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex350_2sec.txt\par
+\par
+It definitely looks like there's some re-absorption with these measurements, so I'll need to make that correction...\par
+\par
+\b 2016-08-23\b0\par
+Measurements with David:\par
+\par
+- Checked emission mono WL calib: OK.\par
+- Checked excitation mono WL calib: adjusted by 0.5 nm.\par
+\b\par
+\b0 65.\tab Emission Scan, bisMSB in LAB 4.47 mg/L, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex350_2sec_160823.txt\par
+\b\par
+\b0 Now to do a sync scan while I clean the cuvette upstairs...\par
+Note that this sync scan is different from my previous ones: I am using the file excitation correction but NOT using any emission correction.\par
+\par
+66.\tab Sync Scan through empty sphere, 250-700 nm, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\EmissionCorrection\\SyncScan_ExcorrFile_NoEmcorr_160823.txt\par
+\b\par
+\b0 Filled cuvette with LAB. Time to measure it. It may be worthwhile re-measuring the bis-MSB in LAB after this one as well as the cuvette wasn't really cleaned that well for the previous measurement.\par
+\par
+67.\tab Emission Scan, Pure LAB, ex. 350 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex350_2sec_160823.txt\par
+\b\par
+2016-08-24\b0\par
+\par
+68.\tab Emission Scan, Pure LAB, ex. 360 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex360_2sec_160823.txt\par
+\par
+69.\tab Emission Scan, Pure LAB, ex. 370 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex370_2sec_160823.txt\par
+\par
+70.\tab Emission Scan, Pure LAB, ex. 380 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex380_2sec_160823.txt\par
+\par
+71.\tab Emission Scan, Pure LAB, ex. 410 nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps.\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_LAB_ex410_2sec_160823.txt\par
+\par
+72.\tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 410nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex410_2sec_160824.txt\par
+\par
+73.\tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 350nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex350_2sec_160824.txt\par
+\par
+74.\tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 360nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex360_2sec_160824.txt\par
+\par
+75. \tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 370nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex370_2sec_160824.txt\par
+\par
+76. \tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 380nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex380_2sec_160824.txt\par
+\b\par
+\b0 77. \tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 390nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex390_2sec_160824.txt\par
+\b\par
+\b0 78. \tab Emission scan, 4.47 mg/L bisMSB in LAB, ex. 400nm, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\bisMSB_LAB\\EmissionScan_bisMSBinLAB_4.47mgL_ex400_2sec_160824.txt\par
+\par
+\b 2016-08-26\b0\par
+\par
+79. \tab Emission scan in box (90deg), 0.894mg/L bisMSB in LAB, ex 350nm, 300-650 nm emission, excorr (file correction), no emcor, 1 sec integration, 1nm steps (mainly as DJ training exercise)\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\bisMSBlab\\bisMSB_LAB_0.894mgL_ex350_20160826\par
+\par
+\b\par
+}
+ 
