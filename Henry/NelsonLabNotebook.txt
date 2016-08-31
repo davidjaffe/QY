@@ -1,0 +1,390 @@
+BNL EDG Summer 2016
+Henry Nelson
+
+Date: June 9, 2016
+
+	Data for exit comparison
+	Sync Scan; Empty sphere; 250-1000nm; 0.2 sec integration; Background of 5 sec;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Output file: EmptySphere_originalOutFitting1
+	Comments: There are a bunch of zeros in the data. Data should be retaken.
+
+	Data for exit comparison
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background of 5 sec;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Lamp: 18.7v, 73W
+	Output file: emptyIS_oldexit.txt and emptyIS_newexit.txt
+	Comments: Data is better. The strange zeros came in at wavelengths >700nm which is outside instrument range.
+
+	Slit changing effects
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background of 5 sec once and kept for all trials;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Lamp: 18.7v, 73W
+	Trials:
+		Excitation slits: 2mm
+		Emission slits: 1mm
+		Output file: emptyIS_2and1.txt
+
+		Excitation slits: 1.5mm
+		Emission slits: 0.75mm
+		Output file: emptyIS_15and075.txt
+
+		Excitation slits: 1mm
+		Emission slits: 0.5mm
+		Output file: emptyIS_1and05.txt
+
+		Excitation slits: 0.5mm
+		Emission slits: 0.25mm
+		Output file: emptyIS_05and025.txt
+	Comments: None
+
+	No Lamp effect
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background used from previous scan;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Lamp: Lamp slider closed 18.7v, 73W 
+	Output file: emptyIS_Nolamp.txt
+	Comments: None
+
+	No Lamp effect
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background 5 sec;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Lamp: Lamp slider closed 18.7v, 73W 
+	Output file: emptyIS_Nolamp1.txt
+	Comments: This is much closer to zero meaning we must retake all data from slit changing section with a new background each time.
+
+
+Date: June 10, 2016
+
+	Slit changing effects Retake
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background of 5 sec for each trial;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Trials:
+		Lamp: 18.6v, 73W
+		Excitation slits: 2mm
+		Emission slits: 1mm
+		Output file: emptyIS_2and1Second.txt
+
+		Lamp: 18.9v, 74W
+		Excitation slits: 1.5mm
+		Emission slits: 0.75mm
+		Output file: emptyIS_15and075Second.txt
+
+		Lamp: 18.8v, 74W
+		Excitation slits: 1mm
+		Emission slits: 0.5mm
+		Output file: emptyIS_1and05Second.txt
+
+		Lamp: 18.2v, 71W
+		Excitation slits: 0.5mm
+		Emission slits: 0.25mm
+		Output file: emptyIS_05and025Second.txt
+	Comments: The signal using the smallest slits is not differentiable from noise. Upon first inspection there does not appear to be an increase in resolution but Lindsey has suggested normalizing them all to be sure. After normalisation, increase in resolution is clear.
+
+
+Date: June 13, 2016
+
+	Old vs new sphere exit
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background of 5 sec;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Lamp: 18.5v, 72W
+	Output file: emptyIS_newExit2.txt and emptyIS_oldExit2.txt
+	Comments: Two scans were taken. One with each sphere fitting for direct comparison.
+
+	Lamp power dependance
+	Sync Scan; Empty sphere; 250-700nm; 0.2 sec integration; Background of 5 sec;
+	Excitation correction: excorr
+	Emission correction: excorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Trials:
+		Lamp: 67W
+		Output file: emptyIS_67.txt
+
+		Lamp: 62W
+		Output file: emptyIS_62.txt
+
+		Lamp: 43W
+		Output file: emptyIS_43.txt
+
+		Lamp: 72W
+		Output file: emptyIS_72.txt
+	
+	Comments: Lamp power was changed with current knob. Power is unstable below 40W.
+
+
+Date: June 15, 2016
+
+	Fluorescent light spectrum for calibration
+	Emission Scan; Empty sphere; 250-700nm; 1 sec integration; No background;
+	Excitation correction: None
+	Emission correction: None
+	Gain: 6.8V
+	Excitation slits: 1mm
+	Emission slits: 0.5mm
+	Output file: FluoLights_1mm.txt
+	Comments: None
+
+
+Date: June 16, 2016
+
+	Calibration using fluorescent lights
+	Emission Scan; Empty sphere; 250-700nm; 1 sec integration; No background;
+	Excitation correction: None
+	Emission correction: None
+	Gain: 6.8V
+	Excitation slits: Not used
+	Emission slits: 0.5mm
+	Output file: FluoLights_05mmJune16.txt, FluoLights_05mmJune16Check.txt, FluoLights_05mmJune16Check2.txt, FluoLights_05mmJune16Check3.txt
+	Comments: One calibration scan and 3 checking scans to look at calibration
+
+	Calibration test
+	Emission Scan; Empty sphere; 250-700nm; 1 sec integration; No background;
+	Excitation correction: None
+	Emission correction: None
+	Gain: 6.8V
+	Excitation slits: 1mm
+	Emission slits: 0.5mm
+	Trials:
+		Excitation: 500nm
+		Output file: calCheck500.txt
+
+		Excitation: 600nm
+		Output file: calCheck600.txt
+
+		Excitation: 400nm
+		Output file: calCheck400.txt
+	Comments: 400nm trial was completed 1 day later on June 17th
+
+
+Date: June 17, 2016
+
+	Calibration Check contined
+	Emission Scan; Empty sphere; 250-700nm; 1 sec integration; No background;
+	Excitation correction: None
+	Emission correction: None
+	Gain: 6.8V
+	Excitation slits: 1mm
+	Emission slits: 0.5mm
+	Trials:
+		Excitation: 400nm
+		Output file: PostCalCheck400.txt
+
+		Excitation: 500nm
+		Output file: PostCalCheck500.txt
+
+		Excitation: 600nm
+		Output file: PostCalCheck600.txt
+	Comments: None
+
+	Gate changing with calibration
+	Sync Scan; Empty sphere; 250-700nm; 1 sec integration; 5 sec background for each trial;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Trials:
+		Excitation slits: 1mm
+		Emission slits: 0.5mm
+		Output file: emptyIS_1and05.txt
+
+		Excitation slits: 2mm
+		Emission slits: 1mm
+		Output file: emptyIS_2and1.txt
+		Excitation slits: 3mm
+		Emission slits: 1.5mm
+		Output file: emptyIS_3and15.txt
+	Comments: Signal is periodic? saved in wideRangeWavy folder
+
+
+Date: June 20, 2016
+
+	Gate changing with calibration
+	Sync Scan; Empty sphere; 250-700nm; 1 sec integration; 5 sec background for each trial;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Trials:
+		Excitation slits: 1mm
+		Emission slits: 0.5mm
+		Output file: emptyIS_1and05.txt
+
+		Excitation slits: 2mm
+		Emission slits: 1mm
+		Output file: emptyIS_2and1.txt
+
+		Excitation slits: 3mm
+		Emission slits: 1.5mm
+		Output file: emptyIS_3and15.txt
+	Comments: saved in wideRange folder
+
+
+Date: June 21, 2016
+	
+	PPO in ethanol scans
+	Emission scan; 320-600nm; 1 sec integration; 5 sec background for each trial;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2.5mm
+	Emission slits: 1.25mm
+	Trials:
+		Sample: 2.50g pure ethanol
+		Output file: etho25June21.txt
+
+		Sample: 2.537g 0.18mM/L PPO in ethanol
+		Output file: pt18mMPPOetho25June21.txt
+
+		Sample: 2.544g 2.1mM/L PPO in ethanol
+		Output file: 2pt1mMPPOetho25June21.txt
+
+		Sample: 2.511g 24mM/L PPO in ethanol
+		Output file: 24mMPPOetho25June21.txt
+
+	Comments: None
+
+
+Date: June 30, 2016
+
+	Made PPO in cyclohexane series and POPOP in cyclohexane series
+
+Date: July 1, 2016
+
+	Testing Monochromator transfer functions 
+	Emission scan; Exciting at 500nm; Empty sphere; 250-700nm; 2 sec integration; 5 sec background for each trial;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Trials:
+		Excitation slits: 1mm
+		Emission slits: 0.5mm
+		Output file: emptyIS_1and05.txt
+
+		Excitation slits: 0.5mm
+		Emission slits: 0.5mm
+		Output file: emptyIS_05and05.txt
+
+		Excitation slits: 1mm
+		Emission slits: 1mm
+		Output file: emptyIS_1and1.txt
+
+		Excitation slits: 1.5mm
+		Emission slits: 1.5mm
+		Output file: emptyIS_15and15.txt
+
+		Excitation slits: 2mm
+		Emission slits: 2mm
+		Output file: emptyIS_2and2.txt
+	Comments: saved in MonoTransfer folder
+
+	Learning and practice with UV-Vis
+	UV-Vis Scan; 200nm-1100nm; Pure cyclohexane baseline
+	Measurement of pure cyclohexane
+	Output file: cycloBaselineJul1.txt
+
+
+Date: July 5, 2016
+
+	Pure Cyclohexane scans
+	Emission scan; Exciting at 313nm; 300-600nm; 1 sec integration; 5 sec background;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Sample: 2.54g pure cyclohexane
+	Output file: BaselineJul5.txt
+	Comments: The spectrum only extends to 500nm so future scans must not be this wide. Integration time should also be increased as there is very little signal.
+
+
+Date: July 6, 2016
+
+	Correction for baselines
+	Sync scan; 200-700nm; 5 sec integration; 10 sec background;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Sample: None
+	Output file: standardEmptyIS_2and1.txt
+	Comments: None
+
+
+Date: July 7, 2016
+
+	REPLACED THE FLUORESCENCE SPECTROMETER LAMP TODAY
+
+	PPO in Cyclohexane scans
+	Emission scan; Exciting at 313nm; 300-600nm; 1 sec integration; 5 sec background;
+	Excitation correction: excorr
+	Emission correction: emcorr-sphere-quanta
+	Gain: 6.8V
+	Excitation slits: 2mm
+	Emission slits: 1mm
+	Sample: 2.52g pure cyclohexane
+	Output file: No output saved
+	Comments: None
+
+Date: July 11, 2016
+
+	Checked POPOP in cyclohexane for POPOP signature
+	Informal, nothing saved or recorded.
+
+	Made p-Terphenyl in cyclohexane series
+
+
+Date: July 13, 2016
+
+	Noticed today that monochromators must be calibrated differently for scans from the box or sphere for unknown reasons.
+	
+	After this date all measurements are standardized to the following criteriea:
+		Excitation slits: 2mm
+		Emission slits: 1mm
+		1 sec integration with 5 sec background
+		Measurments are always taken at 1 nm intervals
+		The excorr correction is always used and a 6,8v gain is applied.
+		If it is a scan using the Integrating Sphere, emcorr-sphere-quanta is always used.
+		If it is a scan using the box, emcorri is always used.
+
+
+Date: August 3, 2016
+
+	Made PPO in etoh series
+
+
+Date: August 5, 2016
+
+	Made PPO in LAB, PPO in EtOH, and BisMSB in LAB series.
+
+
+Date: August 8, 2016
+
+	Recalibrated 2nd monochromator
+
+	Made LAB in cyclohexane
+	Three samples were made of LAB in Cyclohexane. The first became cloudy which was evidence of contamination as LAB and cyclohexane do not react. The second was not cloudy but saturated the UV-Vis spectrometer so a dilution was made giving the 3rd solution.
+
