@@ -414,12 +414,134 @@ Need absorption measurement in sphere for pure ETOH to determine absorption of P
 Following recollection of Henry, I will use 2.5 g of ETOH in 'sphere vial'.\par
 So 8.3g for full vial corresponds to 2.5g of liquid as vial mass is 5.8g.\par
 Note that Xe lamp has been left on since 2016-08-23\par
+Lindsey said that the excitation range for PPO is 290-330 nm. Below 310 nm has essentially zero acceptance in the sphere, so I am limiting the range to 310-340 nm, inclusive.\par
 \par
 86.\tab Emission scan, pure ETOH, 330 nm excitation, 300-650 nm emission, excorr(file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
 \tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_ETOH_ex330_2sec_160830\par
 \par
 87.\tab Emission scan, pure ETOH, 320 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
 \tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_ETOH_ex320_2sec_160830\par
+\par
+88.\tab Emission scan, pure ETOH 310 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_ETOH_ex310_2sec_160830\par
+\par
+89.\tab Emission scan, pure ETOH 340 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_ETOH_ex340_2sec_160830\par
+\par
+\par
+Plan for tomorrow would be to empty and clean the sphere vial, then fill it with 0.31 mg/L PPO in ETOH and see if emission can be observed.\par
+\par
+\b 2016-08-31\b0\par
+\par
+Emission scan of 0.31g/L PPO in ETOH in sphere\par
+\par
+90.\tab Emission scan, 0.31g/L PPO/ETOH, 330 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_0x31gperL_PPOinETOH_ex330_2sec_160831\par
+\par
+I see clear emission with wide, featureless bump from ~340 to ~430 nm. There are ~300 counts at the peak and the baseline looks to be about ~50 counts.\par
+Reference spectra from omlc.org/spectra/PhotochemCAD show absorption peak at 300nm, smaller peak at ~315nm and end of absorption at ~350nm for PPO in CYCLOHEXANE.\par
+Fluorescence spectrum shows main peak at ~355nm, peak at ~80% of main peak at ~375nm, peak at ~60% of main peak at ~335nm with emission starting/ending at 330nm,460nm also for PPO in CYCLOHEXANE. I don't see any of these features but range and overall shape agree with PPO/CX reference.\par
+In Birks, Geake, Lumb, Brit.J.Appl.Phys.1963 vol14,p141, PPO in toluene shows similar peaks.\par
+\par
+91.\tab Emission scan: 0.31g/L PPO/ETOH, 320 nm excitation, 300-650 nm emission, excorr (file correction), no emcor, 2 sec integration, 0.5 nm steps\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_0x31gperL_PPOinETOH_ex320_2sec_160831_\b BAD_DONOTUSE\b0\par
+\par
+Looks like significant wavelength dependence of the baseline. I will repeat the measurement. I had mistakenly done the 5second background measurement with the \par
+shutter open. I repeated the 5sec bkgd measurement with the shutter closed prior to starting the run, but I don't know how the software deals with it.\par
+\par
+92.\tab Emission scan, 0.31g/L PPO/ETOH, 320 nm excitation, 300-650nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_0x31gperL_PPOinETOH_ex320_2sec_160831\par
+\par
+Wavelength dependence of baseline is gone for msmt92, so I have renamed the file for msmt91 as "BAD DONOTUSE".\par
+This spectrum looks similar to 330nm excitation. Still don't see the maxima that are visible in the PPO/CX reference.\par
+\par
+93.\tab Emission scan, 0.31 g/L PPO/ETOH, 310 nm excitation, 300-650nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_0x31gperL_PPOinETOH_ex310_2sec_160831\par
+\par
+Can see emission spectrum, but it is weak compared to longer wavelength, is this due to weaker transmission of the 310nm light through the optical fiber?\par
+\par
+94. \tab Emission scan, 0.31 g/L PPO/ETOH, 340 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integrration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_0x31gperL_PPOinETOH_ex340_2sec_160831\par
+\par
+ Very clear emission spectrum. Clear overlap between start of emission spectrum and the excitation peak.\par
+Now going to increased concentration of 3.14g/L PPO in ETOH. Remove, empty, clean, fill sphere vial. Try to stay calm.\par
+\par
+95.\tab Emission scan, 3.14 g/L PPO in ETOH, 330 nm excitation, 300-650 nm emission, excorr (file correction0, no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_3x14gperL_PPOinETOH_ex330_2sec_160831\par
+\par
+Clear emission spectrum, but I don't see x10 increase in amplitude of peak of emission with respect to baseline. Is this due to self-absorption?\par
+Need to have easy way to compare spectra offline.\par
+\par
+96. \tab Emission scan, 3.14 g/L PPO in ETOH, 320 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_3x14gperL_PPOinETOH_ex320_2sec_160831\par
+\par
+97.\tab Emission scan, 3.14 g/L PPO in ETOH, 310 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_3x14gperL_PPOinETOH_ex310_2sec_160831\par
+\par
+98. \tab Emission scan, 3.14 g/L PPO in ETOH, 340 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_3x14gperL_PPOinETOH_ex340_2sec_160831\par
+\par
+I started msmt 98 prior to leaving for the day. Will check on return.\par
+Note these data were taken 2016-08-31 but exported on 2016-09-01. \par
+\par
+\b 2016-09-01\par
+\par
+\b0 Add a scan at 335nm excitation. Meantime I will prepare a vial for 'box' measurement of 3.14 g/L PPO/ETOH.\par
+\par
+99.\tab Emission scan, 3.14 g/L PPO in ETOH, 335 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Sphere\\PPO_ETOH\\EmissionScan_3x14gperL_PPOinETOH_ex335_2sec_160901\b\tab\par
+\par
+\b0 Mass measurements for 'box vial' with 0.894 mg/L bisMSB in LAB\par
+Full with cap 10.923 g\par
+Empty with cap 8.503 g\par
+liquid mass 2.420 g (consistent with 2.5 g)\par
+Filled with 3.14 g/L PPO in ETOH with cap 10.955 g\par
+PPO in ETOH without cap 9.67 g (use as guide for future filling)\par
+liquid mass 2.452 g\par
+Switch to 'box' measurements\par
+\par
+100. \tab Emission scan in box (90deg), 3.14 g/L PPO in ETOH, 335 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_3x14gperL_PPOinETOH_ex335_2sec_160901\par
+\par
+Note new path. \par
+Cannot see Rayleigh peak\par
+\b\par
+\b0 101.\tab Emission scan in box (90deg), 3.14 g/L PPO in ETOH, 310 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_3x14gperL_PPOinETOH_ex310_2sec_160901\par
+\par
+Some indication of the Rayleigh peak. Must be dominated by re-absorption.\par
+\par
+102. \tab Emission scan in box(90 deg), 3.14 g/L PPO in ETOH, 320 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path:C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_3x14gperL_PPOinETOH_ex320_2sec_160901\par
+\par
+103. \tab Emission scan in box, 3.14 g/L PPO in ETOH, 330 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_3x14gperL_PPOinETOH_ex330_2sec_160901\par
+\par
+104. \tab Emission scan in box, 3.14 g/L PPO in ETOH, 340 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 2 sec integration, 0.5 nm steps\par
+\tab Save path: : C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_3x14gperL_PPOinETOH_ex340_2sec_160901\par
+\par
+Try to do a sync scan for 90 deg. Henry did sync scans with empty sphere. how can I see anything with empty box?\par
+Remove 3.14 g/L PPO in ETOH vial\par
+Replace with empty frosted vial\par
+\par
+105.\tab Sync scan in box, excitation, emission 250 - 350 nm, 1 nm steps, 1 sec integration, excorr (file correction), no emcorr\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\SyncScans\\box_with_frosted_20160901\par
+\par
+Instead try emission scan to see Rayleigh peak. Empty frosted vial in box\par
+\par
+106. \tab Emission scan in box, frosted vial, 350 nm excitation, 330-370 nm emission, excorr(file correction), no emcorr, 1nm steps, 1 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\Empty\\empty_box_frosted_ex350nm_em330-370nm_1sec_20160901\par
+\par
+See a nice peak at ~352nm. Do a better scan.\par
+\par
+107. \tab Emission scan in box, frosted vial, 350 nm excitation, 330-370 nm emission, excorr (file correction), no emcor, 0.5 nm steps, 2 section integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\Empty\\empty_box_frosted_ex350nm_em330-370nm_2sec_20160901\par
+\par
+Looks like this can be used to figure out the offset.\par
+Copying data into github\par
+\par
+\par
+\par
 \par
 \tab\par
 \par
