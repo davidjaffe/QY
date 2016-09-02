@@ -540,6 +540,43 @@ See a nice peak at ~352nm. Do a better scan.\par
 Looks like this can be used to figure out the offset.\par
 Copying data into github\par
 \par
+\b 2016-09-02\par
+\b0\par
+Determine shift from empty_box_frosted_ex350nm_em330-370nm_2sec_20160901 by taking weighted mean of data around peak.\par
+weighted mean (348,356) = 352.4nm (raw or corrected)\par
+weighted mean (350.4,354.4) = 352.3nm (raw or corrected) <== USE THIS\par
+Navigation: ACTION->CALIBRATION->ACESSORIES->MONOCHROMETERS\par
+Set "Em Mono 1" 352.3 as "Go to" and 350.0 as "Set"\par
+\par
+Now check with emission scan\par
+\par
+108.\tab Emission scan in box, frosted vial, 350 nm excitation, 330-370 nm emission, excorr (file correction), no emcorr, 0.5 nm steps, 2 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\Empty\\empty_box_frosted_ex350nm_em330-370nm_2sec_20160902\par
+\par
+No. That didn't work. Did I forget to hit "Set" (that is in my notes...). YES!\par
+Try again\par
+Set "Em Mono 1" 352.3 as "Go to", THEN CLICK "Go to" and 350.0 as "Set", THEN CLICK "Set". Should say "Monochromator calibrated"\par
+\par
+109. \tab Emission scan in box, frosted vial, 350 nm excitation, 330-370 nm emission, excorr (file correction), no emcorr, 0.5 nm steps, 2 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\Empty\\empty_box_frosted_ex350nm_em330-370nm_2sec_20160902_after_calib\par
+\par
+OK. Nailed it. \par
+Now look at emission of 0.31 g/L PPO in ETOH\par
+\par
+110.\tab Emission scan in box, 0.31 g/L PPO in ETOH, 330 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 0.5nm steps, 2 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_0x31gperL_PPOinETOH_ex330_2sec_160902\par
+\par
+Maybe a hint of rayleigh scattering peak...\par
+\par
+111. \tab Emission scan in box, 0.31 g/L PPO in ETOH, 320 nm excitation, 300-650 nm emission, excorr (file correction0, no emcorr, 0.5 nm steps, 2 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_0x31gperL_PPOinETOH_ex320_2sec_160902\par
+\par
+112. \tab Emission scan in box, 0.31 g/L PPO in ETOH, 310 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 0.5 nm steps, 2 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\EmissionScan_0x31gperL_PPOinETOH_ex310_2sec_160902\par
+\par
+113. \tab Emission scan in box, 0.31 g/L PPO in ETOH, 340 nm excitation, 300-650 nm emission, excorr (file correction), no emcorr, 0.5 nm steps, 2 sec integration\par
+\tab Save path: C:\\Documents and Settings\\ptiuser\\Desktop\\Henry\\Emission\\PPOetoh\\Sept\\\par
+\par
 \par
 \par
 \par
